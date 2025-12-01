@@ -4,9 +4,12 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "build:netlify": "npm run build && cp netlify/functions/server.js build/server/netlify-handler.js",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "postbuild": "npm run copy-netlify-handler",
+    "copy-netlify-handler": "mkdir -p build/server && cp netlify/functions/server.js build/server/netlify-handler.js"
   },
   "dependencies": {
     "@react-router/node": "^7.9.2",
